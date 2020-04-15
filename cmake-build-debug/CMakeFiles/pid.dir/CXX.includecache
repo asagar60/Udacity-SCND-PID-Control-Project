@@ -1,0 +1,82 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/arun/New folder/Untitled Folder/Udacity-SCND-PID-Control-Project/src/PID.h
+vector
+-
+
+/home/arun/New folder/Untitled Folder/Udacity-SCND-PID-Control-Project/src/json.hpp
+algorithm
+-
+array
+-
+cassert
+-
+cctype
+-
+ciso646
+-
+cmath
+-
+cstddef
+-
+cstdint
+-
+cstdlib
+-
+cstring
+-
+forward_list
+-
+functional
+-
+initializer_list
+-
+iomanip
+-
+iostream
+-
+iterator
+-
+limits
+-
+locale
+-
+map
+-
+memory
+-
+numeric
+-
+sstream
+-
+stdexcept
+-
+string
+-
+type_traits
+-
+utility
+-
+vector
+-
+
+/home/arun/New folder/Untitled Folder/Udacity-SCND-PID-Control-Project/src/main.cpp
+math.h
+-
+uWS/uWS.h
+-
+iostream
+-
+string
+-
+json.hpp
+/home/arun/New folder/Untitled Folder/Udacity-SCND-PID-Control-Project/src/json.hpp
+PID.h
+/home/arun/New folder/Untitled Folder/Udacity-SCND-PID-Control-Project/src/PID.h
+
