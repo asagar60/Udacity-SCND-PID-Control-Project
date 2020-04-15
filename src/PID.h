@@ -34,8 +34,7 @@ class PID {
 
   void Twiddle(double cte);
   int i;
-  bool caliberated;
-  std::vector <std::vector <double>> best_dp;
+  bool calibrated;
   std::vector <std::vector <double>> best_P;
   std::vector <double> best_err;
 
@@ -49,10 +48,14 @@ class PID {
 
   /**
    * PID Coefficients
-   */ 
+   */
+
+  /**
   double Kp;
   double Ki;
   double Kd;
+
+   */
 
   double threshold ;
   double best_error ;
@@ -65,8 +68,6 @@ class PID {
   bool INIT;
 
   int rounds;
-
-
 
   std::vector<double> dp;
   std::vector <double> P;

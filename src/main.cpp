@@ -38,21 +38,18 @@ int main() {
    * TODO: Initialize the pid variable.
    */
 
-  // using only p - value (1, 0, 0)
+  //using only p - value (1, 0, 0)
   //pid.Init(1,0,0);
+  //pid.Init(0.05, 0, 0);
+  //pid.Init(0.05, 0, 0.5)
 
-  //using p and D values (1, 1, 0)
-  //pid.Init(0.05,0.00005,0.8);
-    //pid.Init(0.06, 0.00031, 1.29);
-    //pid.Init(0.18631,0.000259837,3.02721);
+  //pid.Init(0.05,0.00005,0.5);
 
-  //  pid.Init(0.04, 0.00005, 0.75);
+
   //working
-  //pid.Init(0.0482057, 8.98419e-05, 0.889708 );
-    //pid.Init(0.0611423 ,6.10256e-05, 0.911246);
-    //pid.Init(0.059836, 5.66092e-05, 0.899797);
-    pid.Init(0.0640586, 5.99897e-05, 0.893071 );
-    //bool twiddle = true;
+   //pid.Init(0.0614719 , 5.71802e-05, 0.578529 );
+    pid.Init(0.061, 0.000057, 0.57);
+    //bool twiddle = true;;
     h.onMessage([&pid](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length,
                      uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
@@ -82,13 +79,14 @@ int main() {
           pid.UpdateError(cte);
 
 
-
-          if (pid.caliberated == false){
+         /**
+          * // Uncoment these lines to run twiddle function
+          if (pid.calibrated == false){
               std::cout<<"Iter: "<<pid.i;
               pid.Twiddle(cte);
               pid.i += 1;
           }
-
+*/
 
           steer_value = pid.TotalError();
           // DEBUG
@@ -100,7 +98,6 @@ int main() {
           json msgJson;
           msgJson["steering_angle"] = steer_value;
           msgJson["throttle"] = 0.3;
-          msgJson["speed"] = 10;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
           std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);

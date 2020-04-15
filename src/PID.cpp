@@ -15,14 +15,11 @@ void PID::Init(double Kp_, double Ki_, double Kd_) {
    * TODO: Initialize PID coefficients (and errors, if needed)
    */
 
-  Kp = Kp_;
-  Ki = Ki_;
-  Kd = Kd_;
   d_error = 0;
   p_error = 0;
   i_error = 0;
 
-  threshold = 0.0000001;
+  threshold = 0.00000001;
   best_error = 2.0;
   err = 0.0;
 
@@ -30,20 +27,18 @@ void PID::Init(double Kp_, double Ki_, double Kd_) {
   rounds = 2000;
   i = 0;
 
-  caliberated = false;
+  calibrated = false;
 
-  P.push_back(Kp);
-  P.push_back(Ki);
-  P.push_back(Kd);
+  P.push_back(Kp_);
+  P.push_back(Ki_);
+  P.push_back(Kd_);
 
-  best_P.push_back({Kp,Ki, Kd});
+  best_P.push_back({Kp_,Ki_, Kd_});
   best_err.push_back(best_error);
 
-  dp.push_back(0.001);
-  dp.push_back(0.000001);
-  dp.push_back(0.01);
-
-  best_dp.push_back({0.001, 0.000001, 0.01});
+    dp.push_back(0.001);
+    dp.push_back(0.000001);
+    dp.push_back(0.01);
 
   INIT = true;
   first_check = false;
@@ -91,33 +86,6 @@ void PID::Twiddle(double cte) {
             INIT = false;
             return;
         }
-        /**
-
-        if(first_check == false){
-
-            if ( err < best_err ){
-                best_err = err;
-                dp[variable_counter] *= 1.1;
-                updated = true;
-                first_check = true;
-            }
-            else{
-                P[variable_counter] -= 2 * dp[variable_counter];
-                best_err = err;
-                dp[variable_counter] *= 1.1;
-                updated = true;
-                first_check = true;
-            }
-
-        }
-        else{
-            P[variable_counter] += dp[variable_counter];
-            dp[variable_counter] *= 0.9;
-            updated = true;
-            first_check = true;
-        }
-
-         */
 
         if (first_check == false){
             if(err < best_error ){
@@ -148,8 +116,8 @@ void PID::Twiddle(double cte) {
         std::cout<<" P: "<<P[0]<<" I: "<<P[1]<<" D: "<<P[2]<<" dp[0]: "<<dp[0]<<" dp[1]: "<<dp[1]<<" dp[2]: "<<dp[2]<<" "<< "Error: "<<err<<" Sum: "<<(dp[0] + dp[1] + dp[2])<<" ";
 
     }else{
-        caliberated = true;
-        std::cout<<"\n\nCaliberation Done "<<std::endl;
+        calibrated = true;
+        std::cout<<"\n\nCalibration Done "<<std::endl;
         int best_idx = std::distance(best_err.begin(), std::min_element(best_err.begin(), best_err.end()));
         std::vector <double> v = best_P[best_idx];
         std::cout<<" P I D :"<<v[0]<<" "<<v[1]<<" "<<v[2]<<" "<<std::endl;
